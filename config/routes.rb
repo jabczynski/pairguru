@@ -14,5 +14,21 @@ Rails.application.routes.draw do
     collection do
       get :export
     end
+
+    resources :comments, only: [:create]
   end
+
+  namespace :api, default: { format: :json } do
+    namespace :v1 do
+      resources :movies, only: [:index, :show]
+    end
+
+    namespace :v2 do
+      resources :movies, only: [:index, :show]
+    end
+  end
+
+  resources :comments, only: :destroy
+
+  match "top_users", to: "comments#top_users", via: :get
 end

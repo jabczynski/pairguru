@@ -1,5 +1,23 @@
 %h1= @movie.title
+%h3= "Rating: #{@movie.rating}"
+=image_tag @movie.cover, style: "width: 100;height: 150px"
+.jumbotron
+  = @movie.plot
 .jumbotron
   = @movie.description
+
+%p Comments
+- @movie.comments.each do |comment|
+  .jumbotron
+    = "Author: #{comment.author.email}"
+    %br
+    %p
+      = "Content: #{comment.content}"
+  %p= link_to 'Delete comment', comment_path(comment), method: :delete, class: 'btn btn-sm btn-default'
+
 - if user_signed_in?
   %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default'
+
+  = form_for :comment, url: movie_comments_path(movie_id: @movie.id) do |f|
+    = f.text_area :content
+    = f.submit
