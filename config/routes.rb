@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   end
 
   resources :comments, only: :destroy
+
+  match "top_users", to: "comments#top_users", via: :get
 end
