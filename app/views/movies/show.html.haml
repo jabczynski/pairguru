@@ -1,4 +1,8 @@
 %h1= @movie.title
+%h3= "Rating: #{@movie.rating}"
+=image_tag @movie.cover, style: "width: 100;height: 150px"
+.jumbotron
+  = @movie.plot
 .jumbotron
   = @movie.description
 - if user_signed_in?

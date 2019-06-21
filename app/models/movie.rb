@@ -14,4 +14,8 @@
 
 class Movie < ApplicationRecord
   belongs_to :genre
+
+  attribute :plot, :string
+  attribute :rating, :float
+  attribute :poster, :string
 end
